@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IdP example</title>
+    <script type="application/javascript">
+        // const learnster_url='https://<your-instance>.learnster.com/api/v1/auth/login/azure_openid/';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let form = document.getElementById('learnster-form');
+
+            async function post_token_to_learnster(data) {
+                const json_data = await data.json();
+
+                const requestParams = {
+                    headers: {
+                        'content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({id_token: json_data.token}),
+                    method: 'POST',
+                    redirect: 'manual'
+                };
+                fetch(learnster_url, requestParams)
+                    .then(response => {
+                        if (response.redirected) {
+                            window.location.href = response.redirect;
+                        }
+                    });
+            }
+
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                const url='/token';
+                const requestParams = {
+                    headers: {
+                        'content-type': 'application/json; charset=UTF-8'
+                    },
+                    data: {},
+                    method: 'POST'
+                };
+                fetch(url, requestParams)
+                .then(post_token_to_learnster);
+
+                return false;
+            };
+        });
+    </script>
+</head>
+<body>
+  <form method="post" action="/token" id="learnster-form">
+<!--      TODO: Missing CSRF protection-->
+      <h1>Login To Learnster</h1>
+      <button type="submit">Let's GO!</button>
+  </form>
+</body>
+</html>
