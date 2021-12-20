@@ -3,6 +3,8 @@ Example of a valid OpenID token generation flow:
 
 1. The user clicks a "Login to Learnster" button in the third party system/interface.
 2. The third party client (frontend) calls their `/token` endpoint to fetch a valid OpenID token for the user.
+For an example of an `/token` enpoint, please see https://github.com/Learnster/openid-connect-idp/blob/main/src/idp_initiated_flow/token.py
+
 3. The third party client (frontend) makes an in browser request to Learnster's OpenID login endpoint.
 4. Learnster requests a `/keys` endpoint from the third party to fetch a list of public keys and verifies the OpenID token.
 5. Learnster completes the authentication process (validates the token etc.) and returns a 302 redirect (the redirect target is Learnster's frontend).
