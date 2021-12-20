@@ -1,14 +1,20 @@
 """
-Example of valid OpenID token generation.
+Example of a valid OpenID token generation flow:
 
-Flow:
-    1. User request `/index` page in browser and press button "Login to Learnster".
-    2. FE request `/token` endpoint and receive OpenID token for this user.
-    3. FE make in browser request to Learnster OpenID login endpoint.
-    4. Learnster check OpenID token and request `/keys` endpoint to fetch list of public keys.
-    5. Learnster complete authentication process and return 302 redirect to Learnster FE.
-    6. FE receive redirect response from Learnster OpenID login endpoint and redirect user browser to Location.
+1. The user clicks a "Login to Learnster" button in the third party system/interface.
+2. The third party client (frontend) calls their `/token` endpoint to fetch a valid OpenID token for the user.
+3. The third party client (frontend) makes an in browser request to Learnster's OpenID login endpoint.
+4. Learnster requests a `/keys` endpoint from the third party to fetch a list of public keys and verifies the OpenID token.
+5. Learnster completes the authentication process (validates the token etc.) and returns a 302 redirect (the redirect target is Learnster's frontend).
+6. The third party frontend receives the redirect response from Learnster's OpenID login endpoint and redirects the user's browser to the redirect location.
+
+To sum up:
+
+a. You will need to provide a `/keys` endpoint with valid public keys.
+b. You will need to provide a `/token` endpoint that generates valid OpenID tokens (naturally, since this is an internal endpoint you can name it whatever you see fit).
+c. You will call your `/token` endpoint to get a token for the user, then call Learnster's OpenID login endpoint to get a redirect location and redirect your user to that location.
 """
+
 import base64
 
 from fastapi import FastAPI
