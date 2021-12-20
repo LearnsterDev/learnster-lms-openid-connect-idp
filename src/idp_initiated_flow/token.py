@@ -42,15 +42,16 @@ class TokenGenerator:
             'exp': now + timedelta(minutes=2),
             'iat': now,
             'auth_time': timegm(now.utctimetuple()),  # forced to manually convert datetime to int
-            'nonce': None,  # We set `None` because it's IdP initiated flow and we don't have it.
+            'nonce': None,  # We set `None` because nonce is used for IdP initiated flows which is not valid for this use case.
         }
 
     def _get_additional_payload_data(self, user: UserIdentity) -> dict:
         """
-        Generate some additional payload for OpenID token.
-        List of the available fields could be
-            found https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims .
-        Any of this fields are not required and could be not used by Learnster.
+        Generate additional payload for OpenID token.
+        Please see this article for available fields https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+        
+        Please note that the only required (and used) field is the unique user identifier field; `sub`, `email` or `oid`.
+        Which user identifier field will be used depends on your SSO configuration in Learnster Studio.
         """
         return {
             'given_name': user.first_name,
