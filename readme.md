@@ -1,4 +1,4 @@
-# OpenID Connect IdP Example
+# OpenID Connect IdP Example (for JWT based autentication)
 
 A basic example of an OpenID Connect IdP implementation for JWT based authentication.
 Please use this as a base for your own implementation and make sure to read relevant OpenID and JWT documenation. 
