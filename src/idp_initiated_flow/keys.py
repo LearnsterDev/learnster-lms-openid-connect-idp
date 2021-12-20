@@ -20,9 +20,11 @@ class Key:
 
 def get_keys() -> Sequence[Key]:
     """
-    Return all available keys to sign OpenID token.
-
-    Check OpenID spec and consider signing and keys rotation policies required for your organization.
+    Return all available keys to sign OpenID tokens.
+    
+    Please use this code just as an example.
+    Make sure to check OpenID specification and consider signing your keys and implementing rotation policies according to your organization’s policies and needs.
+    
     https://openid.net/specs/openid-connect-core-1_0.html#SigEnc
     """
     return [
