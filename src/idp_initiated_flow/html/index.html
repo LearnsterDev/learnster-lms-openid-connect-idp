@@ -12,20 +12,13 @@
             async function post_token_to_learnster(data) {
                 const json_data = await data.json();
 
-                const requestParams = {
-                    headers: {
-                        'content-type': 'application/json; charset=UTF-8'
-                    },
-                    body: JSON.stringify({id_token: json_data.token}),
-                    method: 'POST',
-                    redirect: 'manual'
-                };
-                fetch(learnster_url, requestParams)
-                    .then(response => {
-                        if (response.redirected) {
-                            window.location.href = response.redirect;
-                        }
-                    });
+                let form = document.createElement("form");
+                form.setAttribute("style", "display: none;");
+                form.setAttribute("method", "POST");
+                let token_field = document.createElement("input", name="id_token", value=json_data.token);
+                form.appendChild(token_field)
+                document.body.appendChild(form);
+                form.submit();
             }
 
             form.onsubmit = function(event) {
