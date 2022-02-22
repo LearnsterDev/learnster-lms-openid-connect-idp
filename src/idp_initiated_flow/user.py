@@ -11,7 +11,7 @@ class UserIdentity:
 def get_user_identity() -> UserIdentity:
     """
     This function should usually fetch User identity from DB.
-    But as example we just return inmemory object.
+    But as an example we return an inmemory object.
     """
     return UserIdentity(
         email='ex.ample@your-company.com',
