@@ -13,9 +13,12 @@
                 const json_data = await data.json();
 
                 let form = document.createElement("form");
+                form.setAttribute("action", learnster_url);
                 form.setAttribute("style", "display: none;");
                 form.setAttribute("method", "POST");
-                let token_field = document.createElement("input", name="id_token", value=json_data.token);
+                let token_field = document.createElement("input");
+                token_field.name="id_token";
+                token_field.value=json_data.token;
                 form.appendChild(token_field)
                 document.body.appendChild(form);
                 form.submit();
