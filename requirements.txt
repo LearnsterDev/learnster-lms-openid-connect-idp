@@ -1,4 +1,4 @@
 PyJWT==2.15.0
 fastapi==0.70.0
-cryptography==48.0.1
+cryptography==50.0.0
 uvicorn==0.15.0
